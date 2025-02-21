@@ -1,0 +1,56 @@
+import logging  
+import telebot  
+from random import choice  
+
+# Настройка логирования  
+logging.basicConfig(  
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  
+    level=logging.INFO  
+)  
+logger = logging.getLogger(__name__)  
+
+# Ваш токен  
+TOKEN = '8100245321:AAE4tRhdHN1sNmaC3NQsToWoxgq2gJKuNhY'  # Замените на ваш токен  
+
+# Создаем объект бота  
+bot = telebot.TeleBot(TOKEN)  
+
+# Список книг по психологии  
+books = [  
+    "«Думай медленно... решай быстро» — Даниэль Канеман",  
+    "«Психология влияния» — Роберт Чалдини",  
+    "«Эмоциональный интеллект» — Дэниел Гоулман",  
+    "«Сила привычки» — Чарльз Дахигг",  
+    "«Тонкое искусство пофигизма» — Марк Мэнсон",  
+    "«Человек в поисках смысла» — Виктор Франкл",  
+    "«Гибкое сознание» — Кэрол Дуэк",  
+    "«Поток. Психология оптимального переживания» — Михай Чиксентмихайи",  
+    "«Развитая мозг» — Дэвид Иглман",  
+    "«Мозг Будды» — Рик Хэнсон"  
+]  
+
+# Функция старта  
+@bot.message_handler(commands=['start'])  
+def start(message):  
+    user_first_name = message.from_user.first_name  
+    welcome_text = f"Привет, {user_first_name}! Я бот, который поможет тебе подобрать книгу по психологии. Напиши /recommend, чтобы получить рекомендацию."  
+    bot.send_message(message.chat.id, welcome_text)  
+
+# Функция рекомендации книги  
+@bot.message_handler(commands=['recommend'])  
+def recommend(message):  
+    book = choice(books)  
+    bot.send_message(message.chat.id, f"Рекомендую прочитать:\n{book}")  
+
+# Функция помощи  
+@bot.message_handler(commands=['help'])  
+def help_command(message):  
+    help_text = "Доступные команды:\n/start - Начать работу с ботом\n/recommend - Получить рекомендацию книги по психологии\n/help - Показать это сообщение"  
+    bot.send_message(message.chat.id, help_text)  
+
+# Запуск бота  
+if __name__ == '__main__':  
+    try:  
+        bot.polling(none_stop=True)  
+    except Exception as e:  
+        logger.error(f"Ошибка: {e}")
