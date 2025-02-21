@@ -17,11 +17,11 @@
 
 Стартовое меню:
 
-![image]()
+![image](https://raw.githubusercontent.com/lyisan-dulanova-qa/tg_book_main/refs/heads/main/2025-02-21_13-55-21.png)
 
-После выбора карты Visa:
+Рекомендации по выбору книг:
 
-![image]()
+![image](https://raw.githubusercontent.com/lyisan-dulanova-qa/tg_book_main/refs/heads/main/2025-02-21_13-56-28.png)
 
 
 ## 💻 Технологии
